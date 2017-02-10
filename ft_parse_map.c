@@ -6,67 +6,52 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:49:35 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/02/09 16:53:56 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/02/10 16:42:14 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		init_struct(t_point **point)
+t_point		*malloc_point(void)
 {
-	if (!(*point = malloc(sizeof(t_point))))
+	t_point		*point;
+
+	if (!(point = (t_point *)malloc(sizeof(t_point))))
 		return (0);
-	point->x = 0;
-	point->y = 0;
-	point->z = 0;
-	return (1);
+	return (point);
 }
 
-int		init_map(t_map **map)
+void		set_info(t_info *info)
 {
-	if (!(*map = malloc(sizeof(t_map))))
-		return (0);
-	map->point = NULL;
-	map->next = NULL;
-	return (1);
+	info->height = 0;
+	info->width = 0;
 }
 
-void	ft_add_maillon()
-{
-}
-
-int		ft_parse_map(char *filename)
+t_list		*ft_parse_map(char *filename, t_info *info, t_list *list)
 {
 	int			fd;
-	int			length;
 	int			i;
-	int			j;
 	char		*line;
 	t_point		*point;
-	t_map		*map;
 
-	point = NULL;
-	map = NULL;
-	if (!init_struct(&point))
-		return (0);
-	if (!(init_map(&map)))
-		return (0);
+	set_info(info);
 	if (!(fd = open(filename, O_RDONLY)))
 		return (0);
 	while (get_next_line(fd, &line))
-	{
-		length = ft_strlen(line);
+	{	
 		i = 0;
-		while (i < length)
+		while (line[i])
 		{
-			point->x = i / 2;
-			point->y = j;
+			point = malloc_point();
 			point->z = line[i];
-			map->point = point;
-			
+			ft_lstadd(&list, ft_lstnew(point, sizeof(t_point)));
 			i += 2;
+			(info->width == 0) ? info->height++ : 0;
 		}
-		j++;
+		point = malloc_point();
+		info->width++;
+		ft_lstadd(&list, ft_lstnew(point, sizeof(t_point)));
 	}
-	return (0);
+	free(point);
+	return (list);
 }

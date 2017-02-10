@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 10:59:10 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/02/09 16:45:35 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/02/10 16:45:14 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,24 @@
  * */
 #include <stdio.h>
 /*****************************************************/
+
 typedef struct			s_point
 {
 		int				x;
 		int				y;
-		int				z;
+		char			z;
 }						t_point;
 
-typedef struct			s_map
+typedef struct			s_info
 {
-		t_point			point;
-		struct s_map	*next;
-}						t_map;
+		void			*mlx;
+		void			*win;
+		int				height;
+		int				width;
+}						t_info;
 
-int		ft_bind_key(int keycode, void *params);
-int		ft_parse_map(char *filename);
+int				ft_bind_key(int keycode, void *params);
+void			ft_pixel_put(t_info *info, t_list *list);
+void			init(t_info *info, t_list *list);
+t_list			*ft_parse_map(char *filename, t_info *info, t_list *list);
 #endif
