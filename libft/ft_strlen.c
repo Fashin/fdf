@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/06 17:34:04 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/10 14:09:53 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2016/11/06 16:25:08 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2016/12/06 18:38:15 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *s1, const char *s2)
+size_t		ft_strlen(const char *str)
 {
-	int	i;
+	size_t		i;
 
 	i = 0;
-	while (s2[i])
-	{
-		s1[i] = s2[i];
+	while (str[i])
 		i++;
-	}
-	s1[i] = '\0';
-	return (s1);
+	return (i);
 }

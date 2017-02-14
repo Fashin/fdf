@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 14:29:55 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/08 12:11:52 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2016/11/06 14:58:49 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2016/12/02 19:17:07 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elemen))
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	t_list	*result;
-	t_list	*tmp;
-	t_list	*tmp2;
+	int i;
+	int pos;
+	int len;
 
-	if (!lst || !f)
-		return (NULL);
-	tmp2 = f(lst);
-	if ((result = ft_lstnew(tmp2->content, tmp2->content_size)))
+	i = 0;
+	pos = 0;
+	len = 0;
+	while (s2[len] != '\0')
+		len++;
+	if (len == 0)
+		return ((char *)s1);
+	while (s1[i])
 	{
-		tmp = result;
-		lst = lst->next;
-		while (lst)
+		while (s2[pos] == s1[i + pos])
 		{
-			tmp2 = f(lst);
-			if (!(tmp->next = ft_lstnew(tmp2->content, tmp2->content_size)))
-				return (NULL);
-			tmp = tmp->next;
-			lst = lst->next;
+			if (pos == len - 1)
+				return ((char *)s1 + i);
+			pos++;
 		}
+		pos = 0;
+		i++;
 	}
-	return (result);
+	return (0);
 }

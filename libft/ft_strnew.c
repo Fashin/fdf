@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/06 17:34:04 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/10 14:09:53 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2016/11/08 19:50:06 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2016/12/06 18:53:14 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *s1, const char *s2)
+char	*ft_strnew(size_t size)
 {
-	int	i;
+	char	*str;
 
-	i = 0;
-	while (s2[i])
-	{
-		s1[i] = s2[i];
-		i++;
-	}
-	s1[i] = '\0';
-	return (s1);
+	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
+		return (0);
+	ft_bzero(str, size + 1);
+	return (str);
 }

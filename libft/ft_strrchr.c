@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/06 17:34:04 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/10 14:09:53 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2016/11/06 16:48:33 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2016/12/02 19:03:55 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *s1, const char *s2)
+char		*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	int		i;
+	int		pos;
 
 	i = 0;
-	while (s2[i])
+	pos = 0;
+	if (c == 0)
+		return ((char *)s + ft_strlen(s));
+	while (s[i])
 	{
-		s1[i] = s2[i];
+		if (s[i] == c)
+			pos = i;
 		i++;
 	}
-	s1[i] = '\0';
-	return (s1);
+	if (pos == 0 && s[0] != c)
+		return (NULL);
+	else
+		return ((char *)s + pos);
 }

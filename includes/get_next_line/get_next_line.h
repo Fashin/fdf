@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/06 17:34:04 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/10 14:09:53 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2016/12/22 18:19:12 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2017/02/09 16:02:14 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef __GET_NEXT_LINE_H
+# define __GET_NEXT_LINE_H
+# define BUFF_SIZE 100
+# include "../libft/libft.h"
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
 
-char	*ft_strcpy(char *s1, const char *s2)
+typedef struct		s_ct
 {
-	int	i;
+	int				fd;
+	char			*r_line;
+}					t_ct;
 
-	i = 0;
-	while (s2[i])
-	{
-		s1[i] = s2[i];
-		i++;
-	}
-	s1[i] = '\0';
-	return (s1);
-}
+int					get_next_line(const int fd, char **line);
+#endif
