@@ -6,49 +6,51 @@
 #    By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 14:51:59 by cbeauvoi          #+#    #+#              #
-#    Updated: 2017/02/14 19:01:21 by cbeauvoi         ###   ########.fr        #
+#    Updated: 2017/02/14 20:16:21 by cbeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+SRC = 	main.c init.c ft_pixel_put.c ft_parse_map.c \
+	
+INC = get_next_line.c
+
+INC_PATH = includes/get_next_line
+
+INC_OBJ = $(addprefix $(INC_PATH)/, $(INC))
+
+OBJ_NAME = $(SRC:.c=.o)
+
+OBJ_PATH = obj
+
+OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
+
 NAME = fdf
 
-PATH_SRC = ./
+FLAGS = -Wall -Werror -Wextra
 
-PATH_OBJ = ./
-
-PATH_INC = ./libft
-
-GNL_SRC = get_next_line.c
-
-INC_PATH = ./includes
+MINILIBXFLAG = -lmlx -framework OpenGL -framework AppKit
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+all: lib $(OBJ) $(INC)
 
-HEAD = fdf.h
+$(NAME): all
 
-SRC = ft_parse_map.c main.c init.c ft_pixel_put.c
+$(OBJ_PATH)/%.o: ./%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(FLAGS) -o $@ -c $^
 
-OBJ = $(patsubst %.c, %.o, $(addprefix $(PATH_SRC), $(SRC)))
+$(INC): $(INC_OBJ)
+	$(CC) $(FLAGS) -c $^ -o $(OBJ_PATH)/$(INC:.c=.o)
 
-GNL_OBJ = $(GNL_SRC:.c=.o)
-
-all: $(NAME)
-
-$(NAME): $(OBJ) $(HEAD)
-		make -C libft/
-		$(CC) $(CFLAGS) -I -$(PATH_INC) -c $(SRC) $(INC_PATH)/get_next_line/$(GNL_SRC)
-		$(CC) -o $(NAME) $(OBJ) $(GNL_OBJ) -lm -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
-
-re: fclean all
+re: fclean all 
 
 clean:
-	make -C libft/ clean
-	/bin/rm -fv $(OBJ)
+	rm -rfv $(OBJ_PATH) 
+	rm -rfv $(OBJ)
 
 fclean: clean
-	make -C libft/ fclean
-	/bin/rm -fv $(NAME)
+	rm -rfv $(NAME)
 
-.PHONY: all, re, clean, fclean
+lib:
+	make -C libft

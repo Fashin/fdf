@@ -6,12 +6,13 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 10:59:10 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/02/14 18:49:17 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/02/14 19:21:19 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+#include "libft/libft.h"
 #include "includes/minilibx/mlx.h"
 #include "includes/get_next_line/get_next_line.h"
 #include <stdlib.h>
