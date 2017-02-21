@@ -6,7 +6,7 @@
 #    By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:48:58 by cbeauvoi          #+#    #+#              #
-#    Updated: 2016/12/14 17:46:45 by vboivin          ###   ########.fr        #
+#    Updated: 2017/02/16 12:24:34 by cbeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ HEADERFLAGS = -I libft.h
 all: $(NAME)
 
 $(NAME):
-	@$(CC) -c $(CFLAGS) $(SRC_NAME) $(HEADERFLAGS)
+	@$(CC) -c -g $(CFLAGS) $(SRC_NAME) $(HEADERFLAGS)
 	@ar rc $(NAME) $(OBJ_NAME)
 	@ranlib $(NAME)
 

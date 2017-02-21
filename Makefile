@@ -6,11 +6,12 @@
 #    By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/14 14:51:59 by cbeauvoi          #+#    #+#              #
-#    Updated: 2017/02/14 20:16:21 by cbeauvoi         ###   ########.fr        #
+#    Updated: 2017/02/16 13:39:33 by cbeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = 	main.c init.c ft_pixel_put.c ft_parse_map.c \
+		ft_launch_map_resolve.c
 	
 INC = get_next_line.c
 
@@ -32,16 +33,17 @@ MINILIBXFLAG = -lmlx -framework OpenGL -framework AppKit
 
 CC = gcc
 
-all: lib $(OBJ) $(INC)
+all: lib $(OBJ) $(INC) $(NAME)
 
-$(NAME): all
+$(NAME):
+	@$(CC) $(FLAGS) -g -o $@ $(OBJ) $(OBJ_PATH)/$(INC:.c=.o) -Llibft/ -lft $(MINILIBXFLAG)
 
 $(OBJ_PATH)/%.o: ./%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(FLAGS) -o $@ -c $^
 
 $(INC): $(INC_OBJ)
-	$(CC) $(FLAGS) -c $^ -o $(OBJ_PATH)/$(INC:.c=.o)
+	@$(CC) $(FLAGS) -c $^ -o $(OBJ_PATH)/$(INC:.c=.o)
 
 re: fclean all 
 

@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 10:59:10 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/02/14 19:21:19 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:09:05 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,32 @@
 #include <stdio.h>
 /*****************************************************/
 
-typedef struct			s_point
-{
-		int				x;
-		int				y;
-		char			z;
-}						t_point;
 
 typedef struct			s_info
 {
 		void			*mlx;
 		void			*win;
+		void			*img;
+		char			*data;
+		int				bpp;
+		int				sl;
+		int				endian;
 		int				height;
 		int				width;
 }						t_info;
 
-void			ft_pixel_put(t_info *info, t_list *list);
-void			init(t_info *info, t_list *list);
-t_list			*ft_parse_map(char *filename, t_info *info, t_list *list);
+typedef struct			s_point
+{
+			int			x1;
+			int			y1;
+			int			x2;
+			int			y2;
+			int			dx;
+			int			dy;
+}						t_point;
+
+void			ft_puterror(char *error);
+int				init(char *file, t_info *info);
+int				ft_launch_map_resolve(t_info *info, char *points);
+char			*ft_parse_map(char *filename, t_info *info);
 #endif

@@ -6,22 +6,20 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 17:37:39 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2016/12/10 13:58:49 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/02/16 16:50:12 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_realloc(char *str, int size)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	char	*save;
+	void	*new;
 
-	if (!(save = (char *)malloc(sizeof(char) * ft_strlen(str))))
-		return (NULL);
-	ft_memcpy((void *)save, (void *)str, ft_strlen(str));
-	if (!(str = (char *)malloc(sizeof(char) * size)))
-		return (NULL);
-	ft_memcpy((void *)save, (void *)str, ft_strlen(str));
-	free(save);
-	return (str);
+	if (!(new = (void *)malloc(ft_strlen(ptr) * sizeof(void) + size)))
+		return (0);
+	ft_memcpy(new, ptr, ft_strlen(ptr) + size);
+	free(ptr);
+	ft_putstr((char *)new);
+	return (new);
 }

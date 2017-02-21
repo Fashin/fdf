@@ -6,52 +6,78 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:49:35 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2017/02/14 19:01:07 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2017/02/17 15:45:56 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point		*malloc_point(void)
-{
-	t_point		*point;
-
-	if (!(point = (t_point *)malloc(sizeof(t_point))))
-		return (0);
-	return (point);
-}
-
 void		set_info(t_info *info)
 {
 	info->height = 0;
 	info->width = 0;
+	info->bpp = 0;
+	info->sl = 0;
+	info->endian = 0;
 }
 
-t_list		*ft_parse_map(char *filename, t_info *info, t_list *list)
+char	*switch_memory(char *str, int size)
+{
+	char	*ptr;
+	int		i;
+	int		length;
+
+	length = ft_strlen(str) + size + 1;
+	if (!(ptr = (char *)malloc(length * sizeof(char))))
+		return (0);
+	i = -1;
+	while (str[++i])
+		ptr[i] = str[i];
+	ptr[i + 1] = '\0';
+	free(str);
+	return (ptr);
+}
+
+int		count_char(char *str)
+{
+	int		i;
+	int		count;
+
+	i = -1;
+	count = 0;
+	while (str[++i])
+		if (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == '\n')
+			count++;
+	return (count);
+}
+
+char	*ft_parse_map(char *filename, t_info *info)
 {
 	int			fd;
 	int			i;
+	int			j;
 	char		*line;
-	t_point		*point;
+	char		*points;
 
 	set_info(info);
 	if (!(fd = open(filename, O_RDONLY)))
 		return (0);
+	if (!(points = (char *)malloc(sizeof(char))))
+		return (0);
+	j = -1;
 	while (get_next_line(fd, &line))
-	{	
-		i = 0;
-		while (line[i])
+	{
+		i = -1;
+		points = switch_memory(points, count_char(line) + 1);
+		while (line[++i])
 		{
-			point = malloc_point();
-			point->z = line[i];
-			ft_lstadd(&list, ft_lstnew(point, sizeof(t_point)));
-			i += 2;
-			(info->width == 0) ? info->height++ : 0;
+			if (ft_isdigit(line[i]) || line[i] == '\n')
+				points[++j] = line[i];
+			(info->height == 0) ? info->width++ : 0;
 		}
-		point = malloc_point();
-		info->width++;
-		ft_lstadd(&list, ft_lstnew(point, sizeof(t_point)));
+		points[++j] = '\n';
+		info->height++;
 	}
-	free(point);
-	return (list);
+	points[j + 1] = '\0';
+	return (points);
 }
