@@ -6,15 +6,15 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 16:28:16 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2018/06/11 16:29:05 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2018/06/11 17:38:58 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-size_t		ft_tablen(char **tab)
+int			ft_tablen(char **tab)
 {
-	size_t		i;
+	int		i;
 
 	i = -1;
 	while (tab[++i]);
