@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/11 14:37:53 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2018/06/11 16:45:24 by cbeauvoi         ###   ########.fr       */
+/*   Created: 2018/06/11 16:28:16 by cbeauvoi          #+#    #+#             */
+/*   Updated: 2018/06/11 16:29:05 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-#define FDF_H
+#include "../fdf.h"
 
-#include "minilibx/mlx.h"
-#include "libft/get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
-
-typedef	struct				s_map
+size_t		ft_tablen(char **tab)
 {
-		int					pos_x;
-		int					pos_y;
-		int					value;
-}							t_map;
+	size_t		i;
 
-int			checker(char *map_name, t_list *list);
-size_t		ft_tablen(char **tab);
-
-#endif
+	i = -1;
+	while (tab[++i]);
+	return (i);
+}

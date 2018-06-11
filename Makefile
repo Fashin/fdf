@@ -6,7 +6,7 @@
 #    By: cbeauvoi <cbeauvoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/14 11:08:40 by cbeauvoi          #+#    #+#              #
-#    Updated: 2018/06/11 14:58:26 by cbeauvoi         ###   ########.fr        #
+#    Updated: 2018/06/11 16:45:23 by cbeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 
 CFLAGS += -Wall -Wextra -Werror
 
-SRCS = main.c checker.c
+SRCS = main.c checker.c ft_tablen.c
 
 LIB = ./libft/libft.a
 MINILIBX = -I ./minilibx -lmlx -framework OpenGL -framework AppKit
