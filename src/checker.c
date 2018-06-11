@@ -6,7 +6,7 @@
 /*   By: cbeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 14:57:38 by cbeauvoi          #+#    #+#             */
-/*   Updated: 2018/06/11 16:45:21 by cbeauvoi         ###   ########.fr       */
+/*   Updated: 2018/06/11 16:48:46 by cbeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		assign_maillon(char **values, t_list *list, size_t *size_x)
 {
 	int			i;
 	int			j;
-	int			is_neg;
 
 	i = -1;
 	if (!(check_size(values, size_x)))
@@ -35,10 +34,10 @@ int		assign_maillon(char **values, t_list *list, size_t *size_x)
 		j = -1;
 		while (values[i][++j])
 		{
-			if (values[i][j] == '-')
-				is_neg = 1;
-			else if (is_neg)
-
+			if (values[i][j] == '-' && ft_isdigit(values[i][++j]))
+				//enregistrer ici dans ma liste les chiffres negatif
+			else if (ft_isdigit(values[i][j]))
+				//enregistrer ici dans ma liste les chiffres positif
 		}
 	}
 	printf("\n");
